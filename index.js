@@ -19,7 +19,7 @@ const mta = new MTAClient(MTAServer.ip, MTAServer.httpPort, MTAServer.username, 
 async function sendInfoToMTAServer() {
     const vguild = app.guilds.cache.find(guild => guild.id === guildId);
 
-    const members = app.users.cache.size;
+    const members = vguild.members.cache.size;
     const checkInvites = await vguild.fetchInvites();
     const invite = checkInvites.find(invite => invite.maxAge === 0);
     const inviteCode = invite.code ? invite.code : '?';
