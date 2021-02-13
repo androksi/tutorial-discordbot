@@ -1,19 +1,19 @@
 // Pacotes do NPM
-const Discord = require('discord.js');
+const { Client, MessageEmbed } = require('discord.js');
 const MTAClient = require('mtasa').Client;
 
 // Configurações
 const tokenString = require('./config/token');
 const channelId = require('./config/channel');
-const MTAServer = require('./config/mta');
+const { ip, httpPort, username, password } = require('./config/mta');
 const prefix = require('./config/prefix');
 const guildId = require('./config/guild');
 
 // Instância da aplicação
-const app = new Discord.Client();
+const app = new Client();
 
 // Instância do servidor MTA
-const mta = new MTAClient(MTAServer.ip, MTAServer.httpPort, MTAServer.username, MTAServer.password);
+const mta = new MTAClient(ip, httpPort, username, password);
 
 // Funções
 async function sendInfoToMTAServer() {
@@ -81,7 +81,7 @@ app.on('message', async message => {
 
             if (result !== null && typeof result === "object") {
                 const { online, maxPlayers, serverName, serverIp, serverPort } = result;
-                const embed = new Discord.MessageEmbed()
+                const embed = new MessageEmbed()
                     .setAuthor(message.client.user.username, message.client.user.displayAvatarURL())
                     .setTitle('Status do Servidor')
                     .addFields({
