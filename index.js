@@ -22,7 +22,7 @@ async function sendInfoToMTAServer() {
     const members = vguild.members.cache.size;
     const checkInvites = await vguild.fetchInvites();
     const invite = checkInvites.find(invite => invite.maxAge === 0);
-    const inviteCode = invite.code ? invite.code : '?';
+    const inviteCode = invite ? invite.code : 'Could not find an invite to get its code.';
     const guildName = vguild.name;
 
     try {
